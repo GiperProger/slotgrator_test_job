@@ -1,0 +1,5 @@
+TINYINT для grade – занимает меньше памяти (0–255 вместо INT).
+AUTO_INCREMENT для id – улучшает производительность вставок.
+NOT NULL для всех ключевых полей – уменьшает индексный размер.
+INDEX idx_grade (grade) – ускоряет запросы с фильтрацией по grade.
+Внешний ключ FOREIGN KEY (grade) REFERENCES grade(grade) – поддерживает целостность данных.

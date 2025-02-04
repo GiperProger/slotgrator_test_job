@@ -1,0 +1,100 @@
+openapi: 3.0.0
+info:
+  title: Marketplace API
+  description: API documentation for enhanced marketplace features
+  version: 1.0.0
+servers:
+  - url: https://api.market.com
+    description: Production server
+
+paths:
+  /products:
+    get:
+      summary: Get the list of products
+      parameters:
+        - name: category
+          in: query
+          description: Filter by category
+          schema:
+            type: string
+        - name: sort
+          in: query
+          description: Sort products by field
+          schema:
+            type: string
+      responses:
+        200:
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    name:
+                      type: string
+                    description:
+                      type: string
+                    image_url:
+                      type: string
+                    image_urls:
+                      type: array
+                      items:
+                        type: string
+                    category:
+                      type: string
+                    is_favorite:
+                      type: boolean
+
+  /favorites:
+    get:
+      summary: Get favorite products
+      responses:
+        200:
+          description: List of favorite products
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    name:
+                      type: string
+                    description:
+                      type: string
+                    image_url:
+                      type: string
+                    image_urls:
+                      type: array
+                      items:
+                        type: string
+
+  /favorites/{productId}:
+    post:
+      summary: Add product to favorites
+      parameters:
+        - name: productId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Successfully added to favorites
+    delete:
+      summary: Remove product from favorites
+      parameters:
+        - name: productId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Successfully removed from favorites
